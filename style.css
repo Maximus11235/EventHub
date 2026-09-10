@@ -1,0 +1,481 @@
+/* =========================================
+   1. VARIÁVEIS E RESET
+========================================= */
+:root {
+    --bg-color: #1a1a1a;
+    --text-color: #f5f5f5;
+    --border-color: #333;
+    --accent-color: #3b82f6;
+    --spacing-sm: 0.5rem;
+    --spacing-md: 1rem;
+    --spacing-lg: 1.5rem;
+    --spacing-xl: 2rem;
+    --card-min-width: 240px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: system-ui, -apple-system, sans-serif;
+    line-height: 1.6;
+}
+
+a {
+    color: var(--text-color);
+    text-decoration: none;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* =========================================
+   2. CABEÇALHO PADRONIZADO (FLEXBOX)
+========================================= */
+.main-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--spacing-md) var(--spacing-xl);
+    border-bottom: 1px solid var(--border-color);
+    flex-wrap: wrap; /* Importante para o mobile */
+    gap: var(--spacing-md);
+}
+
+/* Estrutura de 3 colunas independentes para o cabeçalho não bugar */
+.header-left, 
+.header-right {
+    flex: 1; /* Ocupam o mesmo espaço nas pontas */
+    display: flex;
+    align-items: center;
+}
+
+.header-right {
+    justify-content: flex-end;
+}
+
+.header-center {
+    flex: 2; /* Ocupa o dobro de espaço no centro */
+    display: flex;
+    justify-content: center;
+}
+
+/* Formulário de Busca */
+.search-form {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    width: 100%;
+    max-width: 500px;
+}
+
+.search-form input {
+    flex: 1; /* Faz o input esticar */
+    padding: var(--spacing-sm) var(--spacing-md);
+}
+
+.search-form button {
+    margin-top: 0; /* Corrige o botão desalinhado */
+    padding: var(--spacing-sm) var(--spacing-md);
+}
+
+/* Menu do Usuário */
+.user-menu-nav {
+    display: flex;
+    gap: var(--spacing-sm);
+}
+
+/* Botões base */
+.back-link,
+.cart-link,
+.settings-link {
+    display: inline-block;
+    padding: var(--spacing-sm) var(--spacing-md);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    background-color: transparent;
+    transition: background 0.3s;
+    font-size: 0.9rem;
+}
+
+.back-link:hover,
+.cart-link:hover,
+.settings-link:hover {
+    background-color: #333;
+}
+
+.cart-badge {
+    background-color: #e63946;
+    color: white;
+    border-radius: 50%;
+    padding: 0.1rem 0.4rem;
+    font-size: 0.8rem;
+    margin-left: 4px;
+}
+
+/* =========================================
+   3. LISTAGENS E CARDS (Trocado de Scroll para Grid Responsivo)
+========================================= */
+main {
+    padding: var(--spacing-xl);
+    max-width: 1440px;
+    margin: 0 auto;
+}
+
+section header h2 {
+    margin-bottom: var(--spacing-lg);
+}
+
+/* Grid que se adapta sozinho (Vertical no celular, Lado a Lado no PC) */
+.tickets-scroll-container,
+.results-scroll-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(var(--card-min-width), 1fr));
+    gap: var(--spacing-lg);
+}
+
+.ticket-card {
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: #222;
+    transition: transform 0.2s;
+}
+
+.ticket-card:hover {
+    transform: translateY(-4px);
+}
+
+.ticket-details {
+    padding: var(--spacing-md);
+}
+
+.ticket-image-wrapper img {
+    width: 100%;
+    aspect-ratio: 4/3;
+    object-fit: cover;
+}
+
+.ticket-title {
+    font-size: 1.1rem;
+    margin-bottom: var(--spacing-sm);
+}
+
+/* =========================================
+   4. DETALHES DO INGRESSO
+========================================= */
+.event-full-details {
+    display: grid;
+    /* A primeira coluna ajusta ao tamanho da imagem, a segunda ocupa o espaço restante */
+    grid-template-columns: auto 1fr; 
+    gap: var(--spacing-xl);
+    align-items: start;
+}
+
+.event-poster-wrapper {
+    width: 100%;
+    max-width: 320px; /* Limita a largura da foto e mata o "espaço fantasma" */
+}
+
+.event-poster-wrapper img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px; /* Dá um acabamento mais profissional */
+    display: block;
+}
+
+/* O TRUQUE: Joga o QR Code e o Formulário de Compra para a linha de baixo */
+.ticket-auth-section,
+.purchase-form {
+    grid-column: 1 / -1; /* Manda o elemento ocupar todas as colunas disponíveis embaixo */
+    margin-top: var(--spacing-md);
+    padding-top: var(--spacing-xl);
+    border-top: 1px dashed var(--border-color); /* Cria uma linha divisória charmosa */
+}
+
+/* Ajustes da área do QR Code */
+.ticket-auth-section {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.qr-code-wrapper {
+    background: #fff;
+    padding: var(--spacing-md);
+    border-radius: 8px;
+    max-width: 220px; /* Garante que o QR code nunca fique gigante */
+    width: 100%;
+    margin-top: var(--spacing-md);
+    margin-bottom: var(--spacing-sm);
+}
+
+.qr-code-image {
+    width: 100%;
+    display: block;
+}
+
+.status-valid {
+    color: #4ade80; /* Verde */
+    font-weight: bold;
+}
+
+/* Ajustes do Formulário de Adicionar ao Carrinho */
+.purchase-form {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    gap: var(--spacing-md);
+    max-width: 400px;
+}
+
+.quantity-control {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+/* =========================================
+   5. CARRINHO DE COMPRAS
+========================================= */
+.cart-container {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: var(--spacing-xl);
+}
+
+.cart-item {
+    display: flex;
+    align-items: center;
+    border: 1px solid var(--border-color);
+    padding: var(--spacing-md);
+    margin-bottom: var(--spacing-md);
+    border-radius: 8px;
+    background-color: #222;
+}
+
+.cart-item-image-wrapper {
+    width: 90px;
+    margin-right: var(--spacing-md);
+    flex-shrink: 0;
+}
+
+.cart-item-image-wrapper img {
+    border-radius: 4px;
+}
+
+/* Esse flex: 1 faz o texto empurrar a quantidade para o lado direito */
+.cart-item-info {
+    flex: 1; 
+}
+
+/* Controle de quantidade encostado na direita */
+.cart-item-quantity-wrapper {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    background: #111;
+    padding: var(--spacing-sm);
+    border-radius: 6px;
+}
+
+.cart-item-quantity-wrapper input {
+    width: 60px;
+    text-align: center;
+}
+
+.cart-summary {
+    border: 1px solid var(--border-color);
+    padding: var(--spacing-lg);
+    border-radius: 8px;
+    background-color: #222;
+    height: fit-content;
+}
+
+.summary-total-display {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: var(--spacing-lg);
+}
+
+/* =========================================
+   6. INPUTS E FORMULÁRIOS GERAIS
+========================================= */
+/* Aplica estilo em coluna APENAS nas telas de Login e Cadastro */
+main > form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+input {
+    padding: var(--spacing-sm);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    background: #2a2a2a;
+    color: white;
+}
+
+button, .btn-finalize, .btn-add-cart {
+    padding: var(--spacing-md);
+    background-color: var(--accent-color);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    width: 100%;
+}
+
+button:hover {
+    background-color: #2563eb;
+}
+
+/* =========================================
+   7. MEDIA QUERIES (RESPONSIVIDADE)
+========================================= */
+
+/* Tablet (768px) */
+@media (max-width: 768px) {
+    .main-header {
+        padding: var(--spacing-md);
+    }
+    
+    /* Empurra a barra de pesquisa para baixo dos botões de menu e voltar */
+    .header-center {
+        order: 3;
+        flex: 0 0 100%;
+        margin-top: var(--spacing-md);
+    }
+    
+    .header-left { order: 1; }
+    .header-right { order: 2; }
+
+    .cart-container {
+        grid-template-columns: 1fr; /* Colapsa carrinho para 1 coluna */
+    }
+}
+/* =========================================
+   8. TELA DA CONTA (CONFIGURAÇÕES)
+========================================= */
+.account-name {
+    font-size: 1.2rem;
+    text-align: center;
+}
+
+/* Centraliza os blocos vertical e horizontalmente */
+.account-main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 60vh; /* Dá espaço para os itens ficarem mais ao centro da tela */
+    gap: var(--spacing-xl);
+}
+
+/* Caixa principal do menu (Referência: quadrado azul) */
+.account-menu {
+    border: 2px solid var(--accent-color);
+    border-radius: 8px;
+    padding: var(--spacing-xl);
+    width: 100%;
+    max-width: 400px;
+    background-color: #222;
+}
+
+.account-links {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+    text-align: center;
+}
+
+.account-links a {
+    font-size: 1.1rem;
+    font-weight: bold;
+    display: block;
+    padding: var(--spacing-sm);
+    border-radius: 4px;
+    transition: background-color 0.2s;
+}
+
+.account-links a:hover {
+    background-color: #333;
+}
+
+/* Caixa do botão de saída (Referência: quadrado vermelho) */
+.logout-wrapper {
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+}
+
+.btn-logout {
+    display: inline-block;
+    width: 100%;
+    padding: var(--spacing-md);
+    border: 2px solid #e63946; /* Vermelho claro */
+    border-radius: 8px;
+    color: #f5f5f5;
+    font-weight: bold;
+    font-size: 1.1rem;
+    transition: all 0.2s;
+    background-color: #222;
+}
+
+.btn-logout:hover {
+    background-color: #e63946;
+    color: white;
+}
+/* Smartphone (480px) */
+@media (max-width: 480px) {
+    main {
+        padding: var(--spacing-md);
+    }
+
+    /* Empilha foto e dados do ingresso na tela de carrinho no celular */
+    .cart-item {
+        flex-direction: column;
+        align-items: stretch;
+        position: relative;
+    }
+
+    .cart-item-image-wrapper {
+        width: 100%;
+        margin-bottom: var(--spacing-sm);
+    }
+    
+    .cart-item-image-wrapper img {
+        aspect-ratio: 16/9;
+        object-fit: cover;
+    }
+
+    .cart-item-quantity-wrapper {
+        justify-content: space-between;
+        margin-top: var(--spacing-md);
+    }
+    /* NOVA REGRA PARA O MOBILE */
+    .event-full-details {
+        grid-template-columns: 1fr; /* Empilha foto, texto e QR Code em 1 coluna vertical */
+    }
+
+    .ticket-auth-section,
+    .purchase-form {
+        grid-column: 1; /* Reseta o grid */
+    }
+
+    .purchase-form {
+        flex-direction: column;
+        align-items: stretch;
+    }
+}
