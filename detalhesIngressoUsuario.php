@@ -71,7 +71,7 @@
                 <!-- BLOCO 3: QR CODE (Substitui o formulário de compra) -->
                 <!-- Usamos a tag <aside> porque é um conteúdo complementar relacionado ao ingresso -->
                 <aside class="ticket-auth-section">
-                    <h2>Autenticação na portaria</h2>
+                    <h2>Autenticação via qrCode</h2>
                     
                     <!-- Placeholder visual para o QR Code -->
                     <figure class="qr-code-wrapper">

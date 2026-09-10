@@ -7,27 +7,40 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <!-- CABEÇALHO PADRONIZADO -->
     <header class="main-header">
-        <!-- Bloco Esquerdo (Voltar ou Logo) -->
         <div class="header-left">
             <nav class="back-nav">
                 <a href="javascript:history.back()" class="back-link">Voltar</a>
             </nav>
         </div>
+        
+        <!-- O nome entra no bloco central. O Flexbox cuidará de centralizá-lo na tela. -->
+        <div class="header-center">
+            <h2 class="account-name">Maximus Rosa do Nascimento</h2>
+        </div>
+        
+        <!-- Bloco direito vazio de propósito para equilibrar o Flexbox e manter o nome no centro exato -->
+        <div class="header-right"></div>
     </header>
 
-    <main>
-        <h2>Maximus Rosa do Nascimento</h2>
+    <main class="account-main">
+        
+        <!-- Caixa de menu (borda azul no protótipo) -->
+        <nav class="account-menu">
+            <ul class="account-links">
+                <li><a href="#">Editar conta</a></li>
+                <li><a href="#">Histórico de compras</a></li>
+                <li><a href="ingressosUsuario.php">Ingressos válidos</a></li>
+                <li><a href="#">Configurações</a></li>
+            </ul>
+        </nav>
 
-        <ul>
-            <li><a href="#">Editar conta</a></li>
-            <li><a href="#">Historico de compras</a></li>
-            <li><a href="/ingressosUsuario.php">Ingressos válidos</a></li>
-            <li><a href="#">Configurações</a></li>
-        </ul>
+        <!-- Botão de sair (borda vermelha no protótipo) -->
+        <div class="logout-wrapper">
+            <a href="login.php" class="btn-logout">Sair da conta</a>
+        </div>
 
-        <!-- Link simulando saída da conta, indo para o login -->
-        <a href="login.php">Sair da conta</a>
     </main>
 </body>
 </html>

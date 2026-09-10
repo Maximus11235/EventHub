@@ -11,6 +11,10 @@
     <!-- CABEÇALHO SUPERIOR -->
     <header class="main-header">
         
+        <div class="header-left">
+            <span>Início</span>
+        </div>
+
         <!-- Bloco Central (Busca) -->
         <div class="header-center">
             <form action="busca.php" method="GET" class="search-form">
