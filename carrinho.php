@@ -35,153 +35,12 @@
             <div class="cart-container">
                 
                 <!-- LISTA VERTICAL DE ITENS -->
-                <div class="cart-items-list">
-                    
-                    <!-- 
-                      INÍCIO DO LOOP PHP 
-                      No PHP puro:< ? php foreach($carrinho as $item): ?>
-                    -->
-                    <article class="cart-item">
-                        
-                        <!-- Foto miniatura -->
-                        <figure class="cart-item-image-wrapper">
-                            <img src="imagens/capaIngresso.jpg" alt="Miniatura do evento">
-                        </figure>
-
-                        <!-- Detalhes textuais principais -->
-                        <div class="cart-item-info">
-                            <h3 class="cart-item-title">Título do evento</h3>
-                            <p class="cart-item-date">
-                                <time datetime="2026-11-15T20:00">data</time>
-                            </p>
-                            <p class="cart-item-price">valor</p>
-                        </div>
-
-                        <!-- Controle de Quantidade por item -->
-                        <div class="cart-item-quantity-wrapper">
-                            <label for="quantidade-1">quantidade:</label>
-                            <input type="number" id="quantidade-1" name="quantidade" min="1" max="10" value="1">
-                        </div>
-
-                    </article><article class="cart-item">
-                        
-                        <!-- Foto miniatura -->
-                        <figure class="cart-item-image-wrapper">
-                            <img src="imagens/capaIngresso.jpg" alt="Miniatura do evento">
-                        </figure>
-
-                        <!-- Detalhes textuais principais -->
-                        <div class="cart-item-info">
-                            <h3 class="cart-item-title">Título do evento</h3>
-                            <p class="cart-item-date">
-                                <time datetime="2026-11-15T20:00">data</time>
-                            </p>
-                            <p class="cart-item-price">valor</p>
-                        </div>
-
-                        <!-- Controle de Quantidade por item -->
-                        <div class="cart-item-quantity-wrapper">
-                            <label for="quantidade-1">quantidade:</label>
-                            <input type="number" id="quantidade-1" name="quantidade" min="1" max="10" value="1">
-                        </div>
-
-                    </article><article class="cart-item">
-                        
-                        <!-- Foto miniatura -->
-                        <figure class="cart-item-image-wrapper">
-                            <img src="imagens/capaIngresso.jpg" alt="Miniatura do evento">
-                        </figure>
-
-                        <!-- Detalhes textuais principais -->
-                        <div class="cart-item-info">
-                            <h3 class="cart-item-title">Título do evento</h3>
-                            <p class="cart-item-date">
-                                <time datetime="2026-11-15T20:00">data</time>
-                            </p>
-                            <p class="cart-item-price">valor</p>
-                        </div>
-
-                        <!-- Controle de Quantidade por item -->
-                        <div class="cart-item-quantity-wrapper">
-                            <label for="quantidade-1">quantidade:</label>
-                            <input type="number" id="quantidade-1" name="quantidade" min="1" max="10" value="1">
-                        </div>
-
-                    </article><article class="cart-item">
-                        
-                        <!-- Foto miniatura -->
-                        <figure class="cart-item-image-wrapper">
-                            <img src="imagens/capaIngresso.jpg" alt="Miniatura do evento">
-                        </figure>
-
-                        <!-- Detalhes textuais principais -->
-                        <div class="cart-item-info">
-                            <h3 class="cart-item-title">Título do evento</h3>
-                            <p class="cart-item-date">
-                                <time datetime="2026-11-15T20:00">data</time>
-                            </p>
-                            <p class="cart-item-price">valor</p>
-                        </div>
-
-                        <!-- Controle de Quantidade por item -->
-                        <div class="cart-item-quantity-wrapper">
-                            <label for="quantidade-1">quantidade:</label>
-                            <input type="number" id="quantidade-1" name="quantidade" min="1" max="10" value="1">
-                        </div>
-
-                    </article><article class="cart-item">
-                        
-                        <!-- Foto miniatura -->
-                        <figure class="cart-item-image-wrapper">
-                            <img src="imagens/capaIngresso.jpg" alt="Miniatura do evento">
-                        </figure>
-
-                        <!-- Detalhes textuais principais -->
-                        <div class="cart-item-info">
-                            <h3 class="cart-item-title">Título do evento</h3>
-                            <p class="cart-item-date">
-                                <time datetime="2026-11-15T20:00">data</time>
-                            </p>
-                            <p class="cart-item-price">valor</p>
-                        </div>
-
-                        <!-- Controle de Quantidade por item -->
-                        <div class="cart-item-quantity-wrapper">
-                            <label for="quantidade-1">quantidade:</label>
-                            <input type="number" id="quantidade-1" name="quantidade" min="1" max="10" value="1">
-                        </div>
-
-                    </article><article class="cart-item">
-                        
-                        <!-- Foto miniatura -->
-                        <figure class="cart-item-image-wrapper">
-                            <img src="imagens/capaIngresso.jpg" alt="Miniatura do evento">
-                        </figure>
-
-                        <!-- Detalhes textuais principais -->
-                        <div class="cart-item-info">
-                            <h3 class="cart-item-title">Título do evento</h3>
-                            <p class="cart-item-date">
-                                <time datetime="2026-11-15T20:00">data</time>
-                            </p>
-                            <p class="cart-item-price">valor</p>
-                        </div>
-
-                        <!-- Controle de Quantidade por item -->
-                        <div class="cart-item-quantity-wrapper">
-                            <label for="quantidade-1">quantidade:</label>
-                            <input type="number" id="quantidade-1" name="quantidade" min="1" max="10" value="1">
-                        </div>
-
-                    </article>
-                    <!-- FIM DO LOOP PHP -->
-
-                </div>
+                <div class="cart-items-list" id="cart-items-list"></div>
 
                 <!-- RESUMO DA COMPRA E CHECKOUT -->
                 <aside class="cart-summary">
                     <div class="summary-total-display">
-                        <p>valor total: <span class="total-amount">n</span></p>
+                        <p>valor total: <span class="total-amount" id="total-amount">R$ 0,00</span></p>
                     </div>
 
                     <!-- Formulário para submeter o fechamento da compra -->
@@ -193,6 +52,6 @@
             </div>
         </section>
     </main>
-
+    <script src="script.js" defer></script>
     </body>
 </html>

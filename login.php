@@ -26,5 +26,6 @@
         <!-- Link para a tela de criar conta -->
         <a href="cadastro.php">Criar nova conta</a>
     </main>
+    <script src="script.js" defer></script>
 </body>
 </html>

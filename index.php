@@ -26,7 +26,7 @@
         <!-- Bloco Direito (Carrinho + Configurações) -->
         <div class="header-right">
             <nav class="user-menu-nav">
-                <a href="carrinho.php" class="cart-link">Carrinho <span class="cart-badge">1</span></a>
+                <a href="carrinho.php" class="cart-link">Carrinho <span class="cart-badge" id="cart-badge">0</span></a>
                 <a href="conta.php" class="settings-link">Configurações</a>
             </nav>
         </div>
@@ -41,6 +41,7 @@
 
             <!-- CONTÊINER DE SCROLL -->
             <!-- Esta div é vital. É ela que o CSS usará para criar a barra de rolagem horizontal -->
+            <div class="search-counter" id="search-counter"></div>
             <div class="tickets-scroll-container">
 
                 <!-- 
@@ -161,7 +162,7 @@
                         </figure>
 
                         <div class="ticket-details">
-                            <h3 class="ticket-title">Nome do Evento</h3>
+                            <h3 class="ticket-title">Nome do Evento Especial</h3>
                             <p class="ticket-date"><time datetime="2026-09-12T19:00">12 de Setembro - 19:00</time></p>
                             <p class="ticket-region">Goiás, GO</p>
                             <address class="ticket-venue">Arena XYZ, Av. Principal, 123</address>
@@ -175,6 +176,6 @@
             </div>
         </section>
     </main>
-
+    <script src="script.js" defer></script>
 </body>
 </html>

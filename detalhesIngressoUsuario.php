@@ -28,7 +28,7 @@
         <!-- Bloco Direito (Carrinho + Configurações) -->
         <div class="header-right">
             <nav class="user-menu-nav">
-                <a href="carrinho.php" class="cart-link">Carrinho <span class="cart-badge">1</span></a>
+                <a href="carrinho.php" class="cart-link">Carrinho <span class="cart-badge" id="cart-badge">0</span></a>
                 <a href="conta.php" class="settings-link">Configurações</a>
             </nav>
         </div>
@@ -52,12 +52,13 @@
                     
                     <p class="event-date">
                         <time datetime="2026-11-15T20:00">15 de Novembro - 20:00</time>
+                        <!-- <time datetime="2026-09-12T19:00">12 de Setembro - 19:00</time> -->
                     </p>
                     <p class="event-region">São Paulo, SP</p>
                     <address class="event-venue">Allianz Parque, Av. Francisco Matarazzo</address>
                     
                     <!-- AQUI ENTRA O ID DO INGRESSO COMPRADO -->
-                    <p class="ticket-id">ID do Ingresso: <strong>987654321ABC</strong></p>
+                    <p class="ticket-id">ID do Ingresso: <strong>987654321ABCA</strong></p>
 
                     <section class="event-description">
                         <h2>Descrição do evento:</h2>
@@ -80,13 +81,15 @@
                     </figure>
 
                     <!-- Feedback visual extra, muito útil para o usuário saber que o ingresso está pronto para uso -->
-                    <p class="ticket-status">Status: <span class="status-valid">Válido</span></p>
+                    <p class="ticket-status">Status: <span class="status-valid" id="ticket-status">Válido</span></p>
+                    <p class="qr-timer" id="qr-timer"></p>
+                    <div class="qr-expired-message" id="qr-expired-message"></div>
                 </aside>
 
             </article>
 
         </section>
     </main>
-
+    <script src="script.js" defer></script>
 </body>
 </html>

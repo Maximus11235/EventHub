@@ -138,7 +138,7 @@ section header h2 {
 .tickets-scroll-container,
 .results-scroll-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(var(--card-min-width), 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
     gap: var(--spacing-lg);
 }
 
@@ -478,4 +478,61 @@ button:hover {
         flex-direction: column;
         align-items: stretch;
     }
+}
+/* =========================================
+   9. INTERATIVIDADE E ESTADOS (ETAPA 04)
+========================================= */
+
+/* Contador de Resultados da Busca */
+.search-counter {
+    margin-bottom: var(--spacing-md);
+    font-size: 0.95rem;
+    color: #9ca3af;
+}
+
+/* Caixa de Alerta de Erros do Cadastro */
+.form-error-box {
+    background-color: #451a1a;
+    color: #ef4444;
+    border: 1px solid #ef4444;
+    padding: var(--spacing-md);
+    border-radius: 6px;
+    margin-bottom: var(--spacing-md);
+}
+
+.form-error-box p {
+    margin-bottom: 4px;
+}
+
+/* Estado de Carrinho Vazio */
+.empty-cart-msg {
+    padding: var(--spacing-xl);
+    text-align: center;
+    color: #9ca3af;
+    font-size: 1.1rem;
+    grid-column: 1 / -1;
+}
+
+/* Status e Temporizador do QR Code */
+.status-expired {
+    color: #ef4444;
+    font-weight: bold;
+}
+
+.qr-timer {
+    margin-top: var(--spacing-sm);
+    font-size: 0.9rem;
+    color: #3b82f6;
+    font-weight: bold;
+}
+
+.qr-expired-message {
+    margin-top: var(--spacing-md);
+    padding: var(--spacing-md);
+    background-color: #2a1a1a;
+    border: 1px solid #ef4444;
+    border-radius: 6px;
+    color: #fca5a5;
+    font-size: 0.9rem;
+    display: none;
 }

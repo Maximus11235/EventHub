@@ -28,7 +28,7 @@
         <!-- Bloco Direito (Carrinho + Configurações) -->
         <div class="header-right">
             <nav class="user-menu-nav">
-                <a href="carrinho.php" class="cart-link">Carrinho <span class="cart-badge">1</span></a>
+                <a href="carrinho.php" class="cart-link">Carrinho <span class="cart-badge" id="cart-badge">0</span></a>
                 <a href="conta.php" class="settings-link">Configurações</a>
             </nav>
         </div>
@@ -49,10 +49,10 @@
 
                 <!-- BLOCO 2: INFORMAÇÕES DE TEXTO -->
                 <div class="event-info-content">
-                    <h1 class="event-title">Título do ingresso</h1>
+                    <h1 class="event-title">Título do ingresso especial</h1>
                     
                     <p class="event-date">
-                        <time datetime="2026-11-15T20:00">15 de Novembro - 20:00</time>
+                        <time datetime="2026-11-15T20:00">15 de Agosto - 20:00</time>
                     </p>
                     <p class="event-region">São Paulo, SP</p>
                     <address class="event-venue">Allianz Parque, Av. Francisco Matarazzo</address>
@@ -72,7 +72,7 @@
 
                 <!-- BLOCO 3: AÇÃO DE COMPRA (CARRINHO) -->
                 <!-- Usamos a tag <form> porque essa ação enviará dados (quantidade e qual evento) para o PHP processar -->
-                <form action="carrinho.php" method="POST" class="purchase-form">
+                <form action="carrinho.php" method="POST" class="purchase-form" id="purchase-form" data-id="987654321" data-title="Título do ingresso" data-price="150.00" data-image="imagens/capaIngresso.jpg" data-date="2026-11-15T20:00">
                     
                     <!-- Campo escondido para enviar o ID do evento para o PHP sem o usuário ver -->
                     <input type="hidden" name="evento_id" value="987654321">
@@ -90,6 +90,6 @@
 
         </section>
     </main>
-
+    <script src="script.js" defer></script>
 </body>
 </html>
