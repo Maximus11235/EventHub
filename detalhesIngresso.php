@@ -13,7 +13,7 @@
         <!-- Bloco Esquerdo (Voltar ou Logo) -->
         <div class="header-left">
             <nav class="back-nav">
-                <a href="javascript:history.back()" class="back-link">Voltar</a>
+                <a href="index.php" class="back-link">Voltar</a>
             </nav>
         </div>
     
@@ -52,7 +52,7 @@
                     <h1 class="event-title">Título do ingresso especial</h1>
                     
                     <p class="event-date">
-                        <time datetime="2026-11-15T20:00">15 de Agosto - 20:00</time>
+                        <time datetime="2026-11-15T20:00">15 de Novembro - 20:00</time>
                     </p>
                     <p class="event-region">São Paulo, SP</p>
                     <address class="event-venue">Allianz Parque, Av. Francisco Matarazzo</address>
@@ -62,10 +62,9 @@
                     <section class="event-description">
                         <h2>Descrição do evento:</h2>
                         <p>
-                            çalksfjaçdksfjaçkdsljfasçdkfljaçdksfjaçdksfjaçsdkjfaçdkjsfaçsdkflaçl
-                            kdjasçdkflalçfaçlkdfjaçlkdsfjaçlkdjsfaçkdsjfçaksjdfçlksajdfçlksjadfçl
-                            kajsçdfkljaçsdklfjaçdksljfaçlkdsjfçalkdsjfaçlkdsfjçaldksjfaçlkdjssçakj
-                            çflaksjdfaçlkdfjaçlkdjsaçsdkfjlaçldksfjaçsdklfjaçldksjfaçsdklfjaçsdkf
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut 
+                            labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris 
+                            nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.
                         </p>
                     </section>
                 </div>
@@ -85,6 +84,8 @@
                     
                     <button type="submit" class="btn-add-cart">Adicionar ao carrinho</button>
                 </form>
+
+                
 
             </article>
 

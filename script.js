@@ -149,8 +149,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 <div class="cart-item-quantity-wrapper">
                     <label for="qtd-${index}">qtd:</label>
                     <input type="number" id="qtd-${index}" min="1" max="10" value="${item.quantidade}" data-index="${index}">
-                    <button type="button" class="btn-remove-item" data-index="${index}" style="background:none; border:none; color:#ef4444; cursor:pointer; margin-left:8px;">✕</button>
-                </div>
+                    <button type="button" class="btn-remove-item" data-index="${index}">✕</button>                
+                    </div>
             `;
             cartItemsList.appendChild(article);
         });
@@ -370,4 +370,145 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+
+
+    /* ==========================================================================
+   7. LÓGICA DE CHECKOUT E PROCESSAMENTO PIX (finalizarCompra.php)
+   ========================================================================== */
+    const checkoutItemsList = document.getElementById('checkout-items-list');
+    const checkoutSubtotal = document.getElementById('checkout-subtotal');
+    const checkoutTotal = document.getElementById('checkout-total');
+    const checkoutForm = document.getElementById('checkout-form');
+
+    function renderizarCheckout() {
+        if (!checkoutItemsList) return;
+
+        const carrinho = obterCarrinho();
+
+        // Se o carrinho estiver vazio ao acessar o checkout, redireciona para a página do carrinho
+        if (carrinho.length === 0) {
+            alert('Seu carrinho está vazio. Redirecionando...');
+            window.location.href = 'carrinho.php';
+            return;
+        }
+
+        checkoutItemsList.innerHTML = '';
+        let totalGeral = 0;
+
+        carrinho.forEach(item => {
+            const subtotal = item.preco * item.quantidade;
+            totalGeral += subtotal;
+
+            const div = document.createElement('div');
+            div.className = 'checkout-item';
+            div.innerHTML = `
+                <img src="${item.imagem}" alt="${item.titulo}" class="checkout-item-image">
+                <div class="checkout-item-details">
+                    <p class="checkout-item-title">${item.titulo}</p>
+                    <p class="checkout-item-qty-price">${item.quantidade}x R$ ${item.preco.toFixed(2).replace('.', ',')}</p>
+                </div>
+            `;
+            checkoutItemsList.appendChild(div);
+        });
+
+        const valorFormatado = totalGeral.toLocaleString('pt-BR', {
+            style: 'currency',
+            currency: 'BRL'
+        });
+
+        if (checkoutSubtotal) checkoutSubtotal.textContent = valorFormatado;
+        if (checkoutTotal) checkoutTotal.textContent = valorFormatado;
+    }
+
+    if (checkoutForm) {
+        checkoutForm.addEventListener('submit', (event) => {
+            event.preventDefault();
+
+            const carrinho = obterCarrinho();
+            if (carrinho.length === 0) {
+                alert('O carrinho está vazio.');
+                return;
+            }
+
+            const totalGeral = carrinho.reduce((acc, item) => acc + (item.preco * item.quantidade), 0);
+
+            // 1. Grava no histórico de compras
+            const historico = JSON.parse(localStorage.getItem('eventhub_historico')) || [];
+            const novoPedido = {
+                id: 'PED-' + Date.now(),
+                data: new Date().toLocaleString('pt-BR'),
+                metodoPagamento: 'PIX',
+                itens: carrinho,
+                total: totalGeral
+            };
+            historico.push(novoPedido);
+            localStorage.setItem('eventhub_historico', JSON.stringify(historico));
+
+            // 2. Adiciona os ingressos à coleção do usuário (eventhub_meus_ingressos)
+            const meusIngressos = JSON.parse(localStorage.getItem('eventhub_meus_ingressos')) || [];
+            carrinho.forEach(item => {
+                for (let i = 0; i < item.quantidade; i++) {
+                    meusIngressos.push({
+                        id: `${item.id}-${Date.now()}-${i}`,
+                        titulo: item.titulo,
+                        data: item.data,
+                        imagem: item.imagem,
+                        status: 'Válido'
+                    });
+                }
+            });
+            localStorage.setItem('eventhub_meus_ingressos', JSON.stringify(meusIngressos));
+
+            // 3. Esvazia o carrinho e atualiza o badge do cabeçalho
+            guardarCarrinho([]);
+
+            alert('Pagamento via PIX confirmado com sucesso! Seus ingressos já estão disponíveis na sua conta.');
+            window.location.href = 'ingressosUsuario.php';
+        });
+    }
+
+    // Executa automaticamente ao carregar a página de checkout
+    if (checkoutItemsList) {
+        renderizarCheckout();
+    }
+    /* ==========================================================================
+       8. EXIBIÇÃO DE INGRESSOS COMPRADOS DO UTILIZADOR (ingressosUsuario.php)
+       ========================================================================== */
+    function renderizarMeusIngressos() {
+        const userTicketsContainer = document.getElementById('user-tickets-container');
+        if (!userTicketsContainer) return;
+    
+        const meusIngressos = JSON.parse(localStorage.getItem('eventhub_meus_ingressos')) || [];
+    
+        userTicketsContainer.innerHTML = '';
+    
+        if (meusIngressos.length === 0) {
+            userTicketsContainer.innerHTML = '<p class="empty-cart-msg">Você ainda não possui ingressos comprados.</p>';
+            return;
+        }
+    
+        meusIngressos.forEach(ingresso => {
+            const article = document.createElement('article');
+            article.className = 'ticket-card';
+            article.innerHTML = `
+                <a href="detalhesIngressoUsuario.php?id=${encodeURIComponent(ingresso.id)}" class="ticket-card-link">
+                    <figure class="ticket-image-wrapper">
+                        <img src="${ingresso.imagem}" alt="${ingresso.titulo}">
+                    </figure>
+                    <div class="ticket-details">
+                        <h3 class="ticket-title">${ingresso.titulo}</h3>
+                        <p class="ticket-date"><time>${ingresso.data}</time></p>
+                        <p class="ticket-region">São Paulo, SP</p>
+                        <address class="ticket-venue">Allianz Parque, Av. Francisco Matarazzo</address>
+                    </div>
+                </a>
+            `;
+            userTicketsContainer.appendChild(article);
+        });
+    }
+    
+    // Executa automaticamente ao carregar ou navegar para ingressosUsuario.php
+    window.addEventListener('pageshow', () => {
+        renderizarMeusIngressos();
+    });
 });

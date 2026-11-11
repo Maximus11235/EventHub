@@ -13,7 +13,7 @@
         <!-- Bloco Esquerdo (Voltar ou Logo) -->
         <div class="header-left">
             <nav class="back-nav">
-                <a href="javascript:history.back()" class="back-link">Voltar</a>
+                <a href="index.php" class="back-link">Voltar</a>
             </nav>
         </div>
     
@@ -35,29 +35,20 @@
     </header>
 
     <!-- CONTEÚDO PRINCIPAL -->
+    <!-- CONTEÚDO PRINCIPAL (ingressosUsuario.php) -->
     <main>
         <section class="tickets-section">
             <header>
                 <h2>Ingressos comprados</h2>
             </header>
-
-            <!-- CONTÊINER DE SCROLL -->
-            <!-- Mantemos a mesma classe da tela inicial, pois o comportamento visual será idêntico -->
-            <div class="tickets-scroll-container">
-
-                <!-- 
-                  INÍCIO DO LOOP PHP 
-                  Aqui você listará os itens que pertencem ao usuário logado.
-                -->
-                
-                <!-- Serve tanto para "evento à venda" quanto para "ingresso comprado" -->
-                
-                
-                <!-- FIM DO LOOP PHP -->
-
+    
+            <!-- CONTÊINER MESTRE DE BILHETES DO UTILIZADOR -->
+            <div class="tickets-scroll-container" id="user-tickets-container">
+                <!-- Os cards de ingressos serão injetados dinamicamente via script.js -->
             </div>
         </section>
     </main>
     <script src="script.js" defer></script>
 </body>
 </html>
+

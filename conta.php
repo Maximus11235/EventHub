@@ -11,7 +11,7 @@
     <header class="main-header">
         <div class="header-left">
             <nav class="back-nav">
-                <a href="javascript:history.back()" class="back-link">Voltar</a>
+                <a href="index.php" class="back-link">Voltar</a>
             </nav>
         </div>
         
@@ -29,10 +29,10 @@
         <!-- Caixa de menu (borda azul no protótipo) -->
         <nav class="account-menu">
             <ul class="account-links">
-                <li><a href="#">Editar conta</a></li>
-                <li><a href="#">Histórico de compras</a></li>
+                <!-- <li><a href="#">Editar conta</a></li> -->
+                <!-- <li><a href="#">Histórico de compras</a></li> -->
                 <li><a href="ingressosUsuario.php">Ingressos válidos</a></li>
-                <li><a href="#">Configurações</a></li>
+                <!-- <li><a href="#">Configurações</a></li> -->
             </ul>
         </nav>
 

@@ -13,7 +13,7 @@
         <!-- Bloco Esquerdo (Voltar ou Logo) -->
         <div class="header-left">
             <nav class="back-nav">
-                <a href="javascript:history.back()" class="back-link">Voltar</a>
+                <a href="index.php" class="back-link">Voltar</a>
             </nav>
         </div>
     
@@ -38,7 +38,6 @@
     <main>
         <section class="event-detail-section">
             
-            <!-- MANTEMOS A MESMA CLASSE: Assim o CSS vai alinhar as 3 colunas perfeitamente igual na tela de compra -->
             <article class="event-full-details">
                 
                 <!-- BLOCO 1: FOTO -->
@@ -63,8 +62,9 @@
                     <section class="event-description">
                         <h2>Descrição do evento:</h2>
                         <p>
-                            çalksfjaçdksfjaçkdsljfasçdkfljaçdksfjaçdksfjaçsdkjfaçdkjsfaçsdkflaçl
-                            kdjasçdkflalçfaçlkdfjaçlkdsfjaçlkdjsfaçkdsjfçaksjdfçlksajdfçlksjadfçl
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut 
+                            labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris 
+                            nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.
                         </p>
                     </section>
                 </div>

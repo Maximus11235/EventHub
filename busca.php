@@ -13,7 +13,7 @@
         <!-- Bloco Esquerdo (Voltar ou Logo) -->
         <div class="header-left">
             <nav class="back-nav">
-                <a href="javascript:history.back()" class="back-link">Voltar</a>
+                <a href="index.php" class="back-link">Voltar</a>
             </nav>
         </div>
     
@@ -62,7 +62,7 @@
 
                         <div class="ticket-details">
                             <h3 class="ticket-title">Steins gate</h3>
-                            <p class="ticket-date"><time datetime="2026-09-12T19:00">12 de Setembro - 19:00</time></p>
+                            <p class="ticket-date"><time datetime="2026-09-12T19:00">15 de Novembro - 19:00</time></p>
                             <p class="ticket-region">Goiás, GO</p>
                             <address class="ticket-venue">Arena XYZ, Av. Principal, 123</address>
                         </div>
@@ -79,7 +79,7 @@
 
                         <div class="ticket-details">
                             <h3 class="ticket-title">Nome do Evento</h3>
-                            <p class="ticket-date"><time datetime="2026-09-12T19:00">12 de Setembro - 19:00</time></p>
+                            <p class="ticket-date"><time datetime="2026-09-12T19:00">15 de Novembro - 19:00</time></p>
                             <p class="ticket-region">Goiás, GO</p>
                             <address class="ticket-venue">Arena XYZ, Av. Principal, 123</address>
                         </div>
@@ -96,7 +96,7 @@
 
                         <div class="ticket-details">
                             <h3 class="ticket-title">Nome do Evento</h3>
-                            <p class="ticket-date"><time datetime="2026-09-12T19:00">12 de Setembro - 19:00</time></p>
+                            <p class="ticket-date"><time datetime="2026-09-12T19:00">15 de Novembro - 19:00</time></p>
                             <p class="ticket-region">Goiás, GO</p>
                             <address class="ticket-venue">Arena XYZ, Av. Principal, 123</address>
                         </div>
@@ -113,7 +113,7 @@
 
                         <div class="ticket-details">
                             <h3 class="ticket-title">Nome do Evento</h3>
-                            <p class="ticket-date"><time datetime="2026-09-12T19:00">12 de Setembro - 19:00</time></p>
+                            <p class="ticket-date"><time datetime="2026-09-12T19:00">15 de Novembro - 19:00</time></p>
                             <p class="ticket-region">Goiás, GO</p>
                             <address class="ticket-venue">Arena XYZ, Av. Principal, 123</address>
                         </div>
@@ -130,7 +130,7 @@
 
                         <div class="ticket-details">
                             <h3 class="ticket-title">Nome do Evento</h3>
-                            <p class="ticket-date"><time datetime="2026-09-12T19:00">12 de Setembro - 19:00</time></p>
+                            <p class="ticket-date"><time datetime="2026-09-12T19:00">15 de Novembro - 19:00</time></p>
                             <p class="ticket-region">Goiás, GO</p>
                             <address class="ticket-venue">Arena XYZ, Av. Principal, 123</address>
                         </div>
@@ -147,7 +147,7 @@
 
                         <div class="ticket-details">
                             <h3 class="ticket-title">Nome do Evento</h3>
-                            <p class="ticket-date"><time datetime="2026-09-12T19:00">12 de Setembro - 19:00</time></p>
+                            <p class="ticket-date"><time datetime="2026-09-12T19:00">15 de Novembro - 19:00</time></p>
                             <p class="ticket-region">Goiás, GO</p>
                             <address class="ticket-venue">Arena XYZ, Av. Principal, 123</address>
                         </div>
@@ -165,7 +165,7 @@
 
                         <div class="ticket-details">
                             <h3 class="ticket-title">Nome do Evento</h3>
-                            <p class="ticket-date"><time datetime="2026-09-12T19:00">12 de Setembro - 19:00</time></p>
+                            <p class="ticket-date"><time datetime="2026-09-12T19:00">15 de Novembro - 19:00</time></p>
                             <p class="ticket-region">Goiás, GO</p>
                             <address class="ticket-venue">Arena XYZ, Av. Principal, 123</address>
                         </div>
