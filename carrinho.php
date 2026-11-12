@@ -52,6 +52,6 @@
             </div>
         </section>
     </main>
-    <script src="script.js" defer></script>
+    <script type="module" src="script.js"></script>
     </body>
 </html>
