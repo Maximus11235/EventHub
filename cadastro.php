@@ -32,6 +32,6 @@
             <button type="submit">Criar Conta</button>
         </form>
     </main>
-    <script src="script.js" defer></script>
+    <script type="module" src="script.js"></script>
 </body>
 </html>

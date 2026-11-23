@@ -12,7 +12,7 @@
     <header class="main-header">
         <div class="header-left">
             <nav class="back-nav">
-                <a href="javascript:history.back()" class="back-link" rel="prev">Voltar</a>
+                <a href="index.php" class="back-link">Voltar</a>
             </nav>
         </div>
 
@@ -52,6 +52,6 @@
             </div>
         </section>
     </main>
-    <script src="script.js" defer></script>
+    <script type="module" src="script.js"></script>
     </body>
 </html>
