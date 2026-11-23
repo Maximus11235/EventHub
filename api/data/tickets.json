@@ -1,0 +1,44 @@
+[
+  {
+    "id": "EVT-101",
+    "titulo": "Steins Gate",
+    "data_evento": "2026-11-15T19:00:00-03:00",
+    "data_formatada": "15 de Novembro - 19:00",
+    "estado": "Goiás, GO",
+    "local": "Arena XYZ, Av. Principal, 123",
+    "imagem": "imagens/capaIngresso.jpg",
+    "preco": 150.00,
+    "quantidade_disponivel": 50,
+    "descricao": "Evento presencial de cultura geek, ficção científica e tecnologia.",
+    "status": "ativo",
+    "criado_em": "2026-11-01T10:00:00-03:00"
+  },
+  {
+    "id": "EVT-102",
+    "titulo": "Festival de Música 2026",
+    "data_evento": "2026-12-01T20:00:00-03:00",
+    "data_formatada": "01 de Dezembro - 20:00",
+    "estado": "São Paulo, SP",
+    "local": "Allianz Parque, Av. Francisco Matarazzo",
+    "imagem": "imagens/capaIngresso.jpg",
+    "preco": 220.00,
+    "quantidade_disponivel": 120,
+    "descricao": "Apresentações ao vivo com bandas nacionais e internacionais.",
+    "status": "ativo",
+    "criado_em": "2026-11-02T14:30:00-03:00"
+  },
+  {
+    "id": "EVT-103",
+    "titulo": "Conferência Engenharia de Software",
+    "data_evento": "2026-12-10T09:00:00-03:00",
+    "data_formatada": "10 de Dezembro - 09:00",
+    "estado": "Goiás, GO",
+    "local": "Centro de Convenções de Goiânia",
+    "imagem": "imagens/capaIngresso.jpg",
+    "preco": 85.00,
+    "quantidade_disponivel": 80,
+    "descricao": "Palestras sobre arquitetura REST, sistemas distribuídos e boas práticas.",
+    "status": "ativo",
+    "criado_em": "2026-11-05T09:15:00-03:00"
+  }
+]

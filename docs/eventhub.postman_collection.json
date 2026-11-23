@@ -1,0 +1,236 @@
+{
+  "info": {
+    "_postman_id": "e6a1b2c3-d4e5-4678-9012-eventhub000006",
+    "name": "EventHub - API REST (Etapa 06)",
+    "description": "Coleção oficial de testes da API RESTful do EventHub (GET, POST, PUT, PATCH, DELETE e cenários de erro).",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8000",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "1. Operações Principais (Sucesso 2xx)",
+      "item": [
+        {
+          "name": "GET - Listar todos os tickets",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Accept", "value": "application/json" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/tickets",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "tickets"]
+            }
+          }
+        },
+        {
+          "name": "GET - Filtrar tickets por busca (?q=Steins)",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Accept", "value": "application/json" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/tickets?q=Steins",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "tickets"],
+              "query": [
+                { "key": "q", "value": "Steins" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "GET - Consultar ticket individual (EVT-101)",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Accept", "value": "application/json" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/tickets/EVT-101",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "tickets", "EVT-101"]
+            }
+          }
+        },
+        {
+          "name": "POST - Criar novo ticket (Vendedor)",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Accept", "value": "application/json" },
+              { "key": "X-User-Role", "value": "vendedor" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"titulo\": \"Show Rock Nacional 2026\",\n  \"data_evento\": \"2026-12-18T21:00:00-03:00\",\n  \"estado\": \"Goiás, GO\",\n  \"local\": \"Estádio Serra Dourada, Goiânia\",\n  \"preco\": 180.00,\n  \"quantidade_disponivel\": 100,\n  \"descricao\": \"Turnê especial de encerramento do ano.\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/tickets",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "tickets"]
+            }
+          }
+        },
+        {
+          "name": "PUT - Atualizar ticket integralmente (EVT-104)",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Accept", "value": "application/json" },
+              { "key": "X-User-Role", "value": "vendedor" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"titulo\": \"Show Rock Nacional 2026 - Lote Extra\",\n  \"data_evento\": \"2026-12-19T21:00:00-03:00\",\n  \"estado\": \"Goiás, GO\",\n  \"local\": \"Estádio Serra Dourada, Goiânia\",\n  \"preco\": 210.00,\n  \"quantidade_disponivel\": 150,\n  \"descricao\": \"Data extra confirmada.\",\n  \"status\": \"ativo\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/tickets/EVT-104",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "tickets", "EVT-104"]
+            }
+          }
+        },
+        {
+          "name": "PATCH - Atualizar preço e estoque parcialmente (EVT-104)",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Accept", "value": "application/json" },
+              { "key": "X-User-Role", "value": "vendedor" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"preco\": 195.00,\n  \"quantidade_disponivel\": 45\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/tickets/EVT-104",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "tickets", "EVT-104"]
+            }
+          }
+        },
+        {
+          "name": "DELETE - Excluir ticket (EVT-104)",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              { "key": "Accept", "value": "application/json" },
+              { "key": "X-User-Role", "value": "vendedor" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/tickets/EVT-104",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "tickets", "EVT-104"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "2. Testes de Validação e Erros (4xx)",
+      "item": [
+        {
+          "name": "Erro 401 - Criar ticket sem cabeçalho de autenticação",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"titulo\": \"Evento Não Autenticado\",\n  \"data_evento\": \"2026-12-20T20:00:00-03:00\",\n  \"estado\": \"GO\",\n  \"local\": \"Goiânia\",\n  \"preco\": 50.00,\n  \"quantidade_disponivel\": 10\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/tickets",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "tickets"]
+            }
+          }
+        },
+        {
+          "name": "Erro 403 - Conta sem permissão (Comprador)",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "X-User-Role", "value": "comprador" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"titulo\": \"Evento Sem Permissão\",\n  \"data_evento\": \"2026-12-20T20:00:00-03:00\",\n  \"estado\": \"GO\",\n  \"local\": \"Goiânia\",\n  \"preco\": 50.00,\n  \"quantidade_disponivel\": 10\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/tickets",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "tickets"]
+            }
+          }
+        },
+        {
+          "name": "Erro 404 - Consultar ticket inexistente",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Accept", "value": "application/json" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/tickets/EVT-999",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "tickets", "EVT-999"]
+            }
+          }
+        },
+        {
+          "name": "Erro 422 - Dados inválidos (Preço negativo e título vazio)",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "X-User-Role", "value": "vendedor" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"titulo\": \"\",\n  \"data_evento\": \"data-invalida\",\n  \"estado\": \"GO\",\n  \"local\": \"Goiânia\",\n  \"preco\": -20,\n  \"quantidade_disponivel\": -5\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/tickets",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "tickets"]
+            }
+          }
+        },
+        {
+          "name": "Erro 400 - JSON malformado",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "X-User-Role", "value": "vendedor" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{ \"titulo\": \"JSON quebrado\", "
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/tickets",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "tickets"]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

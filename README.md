@@ -1,25 +1,29 @@
-### 3. Arquivo `README.md` (Sujeito a alterações)
+# EventHub — Plataforma de Venda e Compra de Ingressos
 
-```markdown
-# EventHub — Plataforma Integrada de Gestão de Eventos
+Aplicação web desenvolvida para a disciplina de **Construção de Software**, estruturada com front-end modular em ES6 Modules e back-end RESTful em PHP com persistência em JSON.
 
-## Descrição da Aplicação
-O **EventHub** é uma aplicação web voltada para o gerenciamento de eventos e emissão de credenciais digitais. O sistema permite que organizadores publiquem eventos, definam lotes e controlem a capacidade de público. Do lado dos participantes, a aplicação viabiliza a busca por eventos, seleção de ingressos, recebimento da credencial digital em PDF contendo um QR Code único e a validação rápida no dia do evento.
+## Requisitos do Ambiente
+- PHP 8.1 ou superior
 
-## Problema que a Aplicação Resolve
-A aplicação resolve a desorganização e a falta de controle no ciclo de venda de ingressos em pequenos e médios eventos. O sistema previne a venda de convites acima da capacidade do local por meio do controle automatizado de estoques, elimina o uso de ingressos em papel através da emissão de credenciais digitais e combate a fraude na entrada usando validação por QR Code com hashes individuais.
+## Como Executar o Projeto
 
-## Tecnologias Utilizadas
-* **PHP 8.4**
-* **Laravel 11**
-* **MySQL**
-* **HTML5 / Blade / Tailwind CSS**
+1. Clone o repositório e acesse a pasta raiz do projeto:
+   ```bash
+   cd Event-Hub
+   ```
+2. Inicie o servidor embutido do PHP utilizando o arquivo de roteamento `router.php`:
+   ```bash
+   php -S localhost:8000 router.php
+   ```
+3. Acesse a aplicação no navegador em `http://localhost:8000/index.php`.
 
-## Instruções para Execução
-*(Nenhuma instrução configurada até o momento)*
+## Endpoints da API REST (Etapa 06)
 
-## Funcionalidades Implementadas
-*(Nenhuma funcionalidade implementada até o momento)*
+- `GET /api/tickets` — Lista todos os tickets disponíveis (aceita filtro `?q=`)
+- `GET /api/tickets/{id}` — Consulta os detalhes de um ticket específico
+- `POST /api/tickets` — Cria um novo ticket (requer cabeçalho `X-User-Role: vendedor`)
+- `PUT /api/tickets/{id}` — Atualiza integralmente um ticket existente
+- `PATCH /api/tickets/{id}` — Atualiza parcialmente campos de um ticket (ex: `preco`, `quantidade_disponivel`)
+- `DELETE /api/tickets/{id}` — Remove um ticket cadastrado
 
-## Limitações Conhecidas
-*(Nenhuma limitação mapeada até o momento)*
+Para exemplos completos de requisições/respostas e testes automatizados, consulte `docs/etapa-06.md` e importe `docs/eventhub.postman_collection.json` no Postman ou Insomnia.
