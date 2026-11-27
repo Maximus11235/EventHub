@@ -1,5 +1,4 @@
 /**
- * EventHub - Script Principal (Ponte ES Module)
- * Importa a arquitetura modularizada da pasta /js
+ * EventHub — Ponte ES Module
  */
 import './js/main.js';

@@ -3,55 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Carrinho de Compras</title>
+    <title>EventHub — Carrinho de Compras</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
-    <!-- CABEÇALHO UNIVERSAL PADRONIZADO -->
     <header class="main-header">
         <div class="header-left">
             <nav class="back-nav">
-                <a href="index.php" class="back-link">Voltar</a>
+                <a href="index.php" class="back-link">Continuar comprando</a>
             </nav>
         </div>
 
         <div class="header-right">
-            <nav class="user-menu-nav">
-                <a href="conta.php" class="settings-link">Configurações</a>
-            </nav>
+            <nav class="user-menu-nav" id="header-user-nav"></nav>
         </div>
     </header>
 
-    <!-- CONTEÚDO PRINCIPAL -->
     <main>
         <section class="cart-section">
             <header>
-                <h2>Tela de carrinho</h2>
+                <h2>Seu Carrinho</h2>
             </header>
 
-            <!-- CONTÊINER MESTRE DO CARRINHO -->
-            <!-- Esta div agrupa a lista vertical de itens à esquerda e o resumo financeiro à direita -->
             <div class="cart-container">
-                
-                <!-- LISTA VERTICAL DE ITENS -->
                 <div class="cart-items-list" id="cart-items-list"></div>
 
-                <!-- RESUMO DA COMPRA E CHECKOUT -->
                 <aside class="cart-summary">
+                    <h3>Resumo</h3>
                     <div class="summary-total-display">
-                        <p>valor total: <span class="total-amount" id="total-amount">R$ 0,00</span></p>
+                        <p>Valor total: <span class="total-amount" id="total-amount">R$ 0,00</span></p>
                     </div>
 
-                    <!-- Formulário para submeter o fechamento da compra -->
-                    <form action="finalizarCompra.php" method="POST" class="checkout-form">
-                        <button type="submit" class="btn-finalize">Finalizar compra</button>
+                    <form action="finalizarCompra.php" method="GET" class="checkout-form" id="go-checkout-form">
+                        <button type="submit" class="btn-finalize" id="btn-go-checkout">Ir para pagamento</button>
                     </form>
                 </aside>
-
             </div>
         </section>
     </main>
+
     <script type="module" src="script.js"></script>
-    </body>
+</body>
 </html>

@@ -1,47 +1,121 @@
 /**
- * Módulo de Validação de Formulários da Interface
+ * Módulo de Autenticação e Cadastro por Perfil
  */
-export function inicializarValidacaoCadastro() {
-  const formCadastro = document.querySelector('form[action="login.php"]');
-  if (!formCadastro) return;
+import {
+  obterUsuarios,
+  salvarUsuarios,
+  definirUsuarioLogado
+} from '../utils/storage.js';
+import { showFeedback } from './feedbackUI.js';
 
-  let errorBox = document.createElement('div');
-  errorBox.className = 'form-error-box';
-  errorBox.style.display = 'none';
-  formCadastro.insertBefore(errorBox, formCadastro.firstChild);
+export function inicializarAutenticacao() {
+  const loginForm = document.getElementById('login-form');
+  if (loginForm) {
+    const errorBox = document.getElementById('login-error-box');
 
-  formCadastro.addEventListener('submit', (event) => {
-    const nome = document.getElementById('nome_completo')?.value.trim() || '';
-    const email = document.getElementById('email')?.value.trim() || '';
-    const cpf = document.getElementById('cpf')?.value.trim() || '';
-    const senha = document.getElementById('senha')?.value || '';
-    const confirmarSenha = document.getElementById('confirmar_senha')?.value || '';
+    function realizarLogin(identifier, senha, ignorarSenha = false) {
+      const users = obterUsuarios();
+      const idLower = identifier.trim().toLowerCase();
+      const found = users.find(
+        u => u.email.toLowerCase() === idLower || u.nome_usuario.toLowerCase() === idLower
+      );
 
-    const erros = [];
+      if (!found || (!ignorarSenha && found.senha !== senha)) {
+        errorBox.textContent = 'Usuário/e-mail ou senha inválidos.';
+        errorBox.classList.remove('hidden');
+        return;
+      }
 
-    if (!nome || !email || !cpf || !senha || !confirmarSenha) {
-      erros.push('Todos os campos são de preenchimento obrigatório.');
+      definirUsuarioLogado(found);
+      if (found.perfil === 'anunciante') {
+        window.location.href = 'anunciante.php';
+      } else if (found.perfil === 'validador') {
+        window.location.href = 'validador.php';
+      } else {
+        window.location.href = 'index.php';
+      }
     }
 
-    if (email && !email.includes('@')) {
-      erros.push('Insira um endereço de e-mail válido (deve conter @).');
-    }
+    loginForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const identifier = document.getElementById('login-identifier').value;
+      const senha = document.getElementById('login-password').value;
+      realizarLogin(identifier, senha, false);
+    });
 
-    const cpfNumeros = cpf.replace(/\D/g, '');
-    if (cpf && cpfNumeros.length !== 11) {
-      erros.push('O CPF deve possuir exatamente 11 dígitos numéricos.');
-    }
+    document.querySelectorAll('.btn-demo-role').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const email = btn.getAttribute('data-demo-email');
+        realizarLogin(email, '', true);
+      });
+    });
+  }
 
-    if (senha && confirmarSenha && senha !== confirmarSenha) {
-      erros.push('As senhas digitadas não coincidem.');
-    }
+  const cadastroForm = document.getElementById('cadastro-form');
+  if (cadastroForm) {
+    const errorBox = document.getElementById('cadastro-error-box');
 
-    if (erros.length > 0) {
-      event.preventDefault();
-      errorBox.innerHTML = erros.map(err => `<p>• ${err}</p>`).join('');
-      errorBox.style.display = 'block';
-    } else {
-      errorBox.style.display = 'none';
-    }
-  });
+    cadastroForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const perfil = document.getElementById('perfil_conta').value;
+      const nomeUsuario = document.getElementById('nome_usuario').value.trim();
+      const nomeCompleto = document.getElementById('nome_completo').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const cpf = document.getElementById('cpf').value.trim();
+      const telefone = document.getElementById('telefone').value.trim();
+      const senha = document.getElementById('senha').value;
+      const confirmarSenha = document.getElementById('confirmar_senha').value;
+
+      const erros = [];
+      if (!nomeUsuario || !nomeCompleto || !email || !cpf || !senha) {
+        erros.push('Preencha todos os campos obrigatórios.');
+      }
+      if (email && !email.includes('@')) {
+        erros.push('Informe um e-mail válido.');
+      }
+      if (cpf && cpf.replace(/\D/g, '').length !== 11) {
+        erros.push('O CPF deve conter 11 dígitos.');
+      }
+      if (senha.length < 4) {
+        erros.push('A senha deve ter pelo menos 4 caracteres.');
+      }
+      if (senha !== confirmarSenha) {
+        erros.push('As senhas não coincidem.');
+      }
+
+      const users = obterUsuarios();
+      if (users.some(u => u.email.toLowerCase() === email.toLowerCase())) {
+        erros.push('Este e-mail já está cadastrado.');
+      }
+
+      if (erros.length > 0) {
+        errorBox.innerHTML = erros.map(err => `<p>• ${err}</p>`).join('');
+        errorBox.classList.remove('hidden');
+        return;
+      }
+
+      const novoUsuario = {
+        id: 'USR-' + Date.now(),
+        perfil,
+        nome_usuario: nomeUsuario,
+        nome_completo: nomeCompleto,
+        email,
+        cpf,
+        telefone,
+        senha,
+        cartao: null
+      };
+
+      users.push(novoUsuario);
+      salvarUsuarios(users);
+      definirUsuarioLogado(novoUsuario);
+
+      showFeedback('Conta criada com sucesso!', 'success');
+      setTimeout(() => {
+        if (perfil === 'anunciante') window.location.href = 'anunciante.php';
+        else if (perfil === 'validador') window.location.href = 'validador.php';
+        else window.location.href = 'index.php';
+      }, 900);
+    });
+  }
 }

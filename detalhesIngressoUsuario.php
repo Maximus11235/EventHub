@@ -3,93 +3,85 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Detalhes do Meu Ingresso</title>
+    <title>EventHub — Passe Digital e QR Code</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
-    <!-- CABEÇALHO SUPERIOR (Agora com o carrinho que adicionamos) -->
     <header class="main-header">
-        <!-- Bloco Esquerdo (Voltar ou Logo) -->
         <div class="header-left">
             <nav class="back-nav">
-                <a href="index.php" class="back-link">Voltar</a>
+                <a href="ingressosUsuario.php" class="back-link">Meus Ingressos</a>
             </nav>
         </div>
-    
-        <!-- Bloco Central (Busca) -->
-        <div class="header-center">
-            <form action="busca.php" method="GET" class="search-form">
-                <input type="search" name="q" placeholder="Pesquisar...">
-                <button type="submit">Buscar</button>
-            </form>
-        </div>
-    
-        <!-- Bloco Direito (Carrinho + Configurações) -->
+
         <div class="header-right">
-            <nav class="user-menu-nav">
-                <a href="carrinho.php" class="cart-link">Carrinho <span class="cart-badge" id="cart-badge">0</span></a>
-                <a href="conta.php" class="settings-link">Configurações</a>
-            </nav>
+            <nav class="user-menu-nav" id="header-user-nav"></nav>
         </div>
     </header>
 
-    <!-- CONTEÚDO PRINCIPAL -->
     <main>
         <section class="event-detail-section">
-            
-            <article class="event-full-details">
-                
-                <!-- BLOCO 1: FOTO -->
+            <article class="event-full-details" id="user-ticket-detail-article">
                 <figure class="event-poster-wrapper">
-                    <img src="imagens/capaIngresso.jpg" alt="Pôster do evento">
+                    <img src="imagens/capaIngresso.jpg" alt="Pôster do evento" id="user-ticket-poster">
                 </figure>
 
-                <!-- BLOCO 2: INFORMAÇÕES DE TEXTO -->
                 <div class="event-info-content">
-                    <h1 class="event-title">Título do ingresso</h1>
-                    
-                    <p class="event-date">
-                        <time datetime="2026-11-15T20:00">15 de Novembro - 20:00</time>
-                        <!-- <time datetime="2026-09-12T19:00">12 de Setembro - 19:00</time> -->
-                    </p>
-                    <p class="event-region">São Paulo, SP</p>
-                    <address class="event-venue">Allianz Parque, Av. Francisco Matarazzo</address>
-                    
-                    <!-- AQUI ENTRA O ID DO INGRESSO COMPRADO -->
-                    <p class="ticket-id">ID do Ingresso: <strong>987654321ABCA</strong></p>
+                    <div class="ticket-highlight-bar">
+                        <div class="highlight-box">
+                            <span class="highlight-label">Classe / Categoria</span>
+                            <strong class="highlight-value" id="user-ticket-category">--</strong>
+                        </div>
+                        <div class="highlight-box">
+                            <span class="highlight-label">Assento</span>
+                            <strong class="highlight-value" id="user-ticket-seat">--</strong>
+                        </div>
+                        <div class="highlight-box">
+                            <span class="highlight-label">Status</span>
+                            <strong class="status-valid" id="ticket-status">Válido</strong>
+                        </div>
+                    </div>
 
-                    <section class="event-description">
-                        <h2>Descrição do evento:</h2>
-                        <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut 
-                            labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris 
-                            nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.
-                        </p>
+                    <h1 class="event-title" id="user-ticket-title">Carregando ingresso...</h1>
+
+                    <p class="event-date">
+                        <time id="user-ticket-date">--</time>
+                    </p>
+                    <p class="event-establishment" id="user-ticket-establishment">--</p>
+                    <p class="event-region" id="user-ticket-region">--</p>
+                    <address class="event-venue" id="user-ticket-venue">--</address>
+
+                    <p class="ticket-id">Titular: <strong id="user-ticket-buyer">--</strong></p>
+                    <p class="ticket-id">Código Único QR: <strong id="user-ticket-qr-code">--</strong></p>
+
+                    <section class="minimap-section">
+                        <h2>Localização do Evento (Minimapa)</h2>
+                        <div class="minimap-wrapper">
+                            <iframe
+                                id="user-ticket-minimap"
+                                title="Minimapa do evento"
+                                loading="lazy"
+                                referrerpolicy="no-referrer-when-downgrade">
+                            </iframe>
+                        </div>
                     </section>
                 </div>
 
-                <!-- BLOCO 3: QR CODE (Substitui o formulário de compra) -->
-                <!-- Usamos a tag <aside> porque é um conteúdo complementar relacionado ao ingresso -->
                 <aside class="ticket-auth-section">
-                    <h2>Autenticação via qrCode</h2>
-                    
-                    <!-- Placeholder visual para o QR Code -->
-                    <figure class="qr-code-wrapper">
-                        <!-- No CSS deixaremos isso com um formato quadrado certinho para receber a imagem gerada pelo PHP no futuro -->
-                        <img src="imagens/qrcodeExemplo.png" alt="QR Code de acesso ao evento" class="qr-code-image">
+                    <h2>Validação na Portaria (QR Code Único)</h2>
+
+                    <figure class="qr-code-wrapper" id="qr-code-wrapper">
+                        <img src="imagens/qrcodeExemplo.png" alt="QR Code único de acesso" class="qr-code-image" id="qr-code-image">
                     </figure>
 
-                    <!-- Feedback visual extra, muito útil para o usuário saber que o ingresso está pronto para uso -->
-                    <p class="ticket-status">Status: <span class="status-valid" id="ticket-status">Válido</span></p>
+                    <button type="button" class="btn-secondary" id="btn-copy-qr">Copiar código QR para validação</button>
                     <p class="qr-timer" id="qr-timer"></p>
-                    <div class="qr-expired-message" id="qr-expired-message"></div>
+                    <div class="qr-expired-message hidden" id="qr-expired-message"></div>
                 </aside>
-
             </article>
-
         </section>
     </main>
+
     <script type="module" src="script.js"></script>
 </body>
 </html>

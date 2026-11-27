@@ -3,49 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meus Ingressos</title>
+    <title>EventHub — Eventos no Ar</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
-    <!-- CABEÇALHO SUPERIOR -->
     <header class="main-header">
-        
         <div class="header-left">
-            <span>Início</span>
+            <a href="index.php" class="brand-logo">EventHub</a>
         </div>
 
-        <!-- Bloco Central (Busca) -->
         <div class="header-center">
             <form action="busca.php" method="GET" class="search-form">
-                <input type="search" name="q" placeholder="Pesquisar...">
+                <input type="search" name="q" placeholder="Pesquisar eventos, cidades ou locais...">
                 <button type="submit">Buscar</button>
             </form>
         </div>
 
-        <!-- Bloco Direito (Carrinho + Configurações) -->
         <div class="header-right">
-            <nav class="user-menu-nav">
-                <a href="carrinho.php" class="cart-link">Carrinho <span class="cart-badge" id="cart-badge">0</span></a>
-                <a href="conta.php" class="settings-link">Configurações</a>
-            </nav>
+            <nav class="user-menu-nav" id="header-user-nav"></nav>
         </div>
     </header>
 
-    <!-- CONTEÚDO PRINCIPAL -->
     <main>
+        <section class="hero-banner" id="role-banner"></section>
+
         <section class="tickets-section">
-            <header>
-                <h2>Lista de ingressos comprados</h2>
+            <header class="section-header-row">
+                <h2>Eventos disponíveis no ar</h2>
+                <span class="search-counter" id="search-counter"></span>
             </header>
 
-            <!-- CONTÊINER DE SCROLL -->
-            <!-- Esta div é vital. É ela que o CSS usará para criar a barra de rolagem horizontal -->
-            <div class="search-counter" id="search-counter"></div>
             <div class="results-scroll-container" id="results-container"></div>
-            </div>
         </section>
     </main>
+
     <script type="module" src="script.js"></script>
 </body>
 </html>

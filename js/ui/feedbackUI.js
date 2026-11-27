@@ -1,61 +1,38 @@
 /**
- * Módulo de Feedback Visual (Loading Spinners e Alertas por Categoria de Erro/Sucesso)
+ * Módulo de Notificações Toast e Estado de Carregamento (Sem estilos inline)
  */
-export function toggleLoading(isLoading, targetButton = null) {
-  const spinner = document.getElementById('loading-spinner');
-  if (spinner) {
-    spinner.classList.toggle('hidden', !isLoading);
-    spinner.style.display = isLoading ? 'inline-block' : 'none';
+let toastTimeout = null;
+
+export function showFeedback(message, type = 'info') {
+  let toast = document.getElementById('eventhub-toast');
+  if (!toast) {
+    toast = document.createElement('div');
+    toast.id = 'eventhub-toast';
+    toast.setAttribute('role', 'status');
+    toast.setAttribute('aria-live', 'polite');
+    document.body.appendChild(toast);
   }
 
-  if (targetButton) {
-    targetButton.disabled = isLoading;
-    if (isLoading) {
-      targetButton.dataset.originalText = targetButton.textContent;
-      targetButton.textContent = 'Processando...';
-    } else if (targetButton.dataset.originalText) {
-      targetButton.textContent = targetButton.dataset.originalText;
-    }
+  toast.className = `toast-feedback toast-${type}`;
+  toast.textContent = message;
+
+  if (toastTimeout) {
+    clearTimeout(toastTimeout);
   }
+
+  toastTimeout = setTimeout(() => {
+    toast.classList.add('hidden');
+  }, 4000);
 }
 
-export function showFeedback(message, type = 'danger', containerId = 'feedback-message') {
-  let feedbackBox = document.getElementById(containerId);
-
-  if (!feedbackBox) {
-    feedbackBox = document.createElement('div');
-    feedbackBox.id = containerId;
-    feedbackBox.style.position = 'fixed';
-    feedbackBox.style.top = '20px';
-    feedbackBox.style.right = '20px';
-    feedbackBox.style.zIndex = '9999';
-    feedbackBox.style.padding = '12px 20px';
-    feedbackBox.style.borderRadius = '6px';
-    feedbackBox.style.fontWeight = 'bold';
-    feedbackBox.style.boxShadow = '0 4px 10px rgba(0,0,0,0.15)';
-    document.body.appendChild(feedbackBox);
+export function toggleLoading(button, isLoading, loadingText = 'Processando...') {
+  if (!button) return;
+  if (isLoading) {
+    button.dataset.originalText = button.textContent;
+    button.textContent = loadingText;
+    button.disabled = true;
+  } else {
+    button.textContent = button.dataset.originalText || button.textContent;
+    button.disabled = false;
   }
-
-  const bgColors = {
-    success: '#28a745',
-    danger: '#dc3545',
-    warning: '#ffc107',
-    info: '#17a2b8'
-  };
-
-  const textColors = {
-    warning: '#212529',
-    success: '#ffffff',
-    danger: '#ffffff',
-    info: '#ffffff'
-  };
-
-  feedbackBox.style.backgroundColor = bgColors[type] || bgColors.danger;
-  feedbackBox.style.color = textColors[type] || '#ffffff';
-  feedbackBox.textContent = message;
-  feedbackBox.style.display = 'block';
-
-  setTimeout(() => {
-    feedbackBox.style.display = 'none';
-  }, 4500);
 }

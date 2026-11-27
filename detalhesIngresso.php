@@ -3,94 +3,110 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Detalhes do Ingresso</title>
+    <title>EventHub — Detalhes do Evento</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
-    <!-- CABEÇALHO SUPERIOR -->
     <header class="main-header">
-        <!-- Bloco Esquerdo (Voltar ou Logo) -->
         <div class="header-left">
             <nav class="back-nav">
                 <a href="index.php" class="back-link">Voltar</a>
             </nav>
         </div>
-    
-        <!-- Bloco Central (Busca) -->
+
         <div class="header-center">
             <form action="busca.php" method="GET" class="search-form">
                 <input type="search" name="q" placeholder="Pesquisar...">
                 <button type="submit">Buscar</button>
             </form>
         </div>
-    
-        <!-- Bloco Direito (Carrinho + Configurações) -->
+
         <div class="header-right">
-            <nav class="user-menu-nav">
-                <a href="carrinho.php" class="cart-link">Carrinho <span class="cart-badge" id="cart-badge">0</span></a>
-                <a href="conta.php" class="settings-link">Configurações</a>
-            </nav>
+            <nav class="user-menu-nav" id="header-user-nav"></nav>
         </div>
     </header>
 
-    <!-- CONTEÚDO PRINCIPAL -->
     <main>
         <section class="event-detail-section">
-            
-            <!-- CONTÊINER MESTRE DOS DETALHES -->
-            <!-- Esta tag <article> servirá como o contêiner principal para o CSS (usando Flexbox ou Grid) colocar as 3 colunas lado a lado -->
-            <article class="event-full-details">
-                
-                <!-- BLOCO 1: FOTO -->
+            <article class="event-full-details" id="event-detail-article">
                 <figure class="event-poster-wrapper">
-                    <img src="imagens/capaIngresso.jpg" alt="Pôster do evento">
+                    <img src="imagens/capaIngresso.jpg" alt="Pôster do evento" id="event-poster">
                 </figure>
 
-                <!-- BLOCO 2: INFORMAÇÕES DE TEXTO -->
                 <div class="event-info-content">
-                    <h1 class="event-title">Título do ingresso especial</h1>
-                    
-                    <p class="event-date">
-                        <time datetime="2026-11-15T20:00">15 de Novembro - 20:00</time>
-                    </p>
-                    <p class="event-region">São Paulo, SP</p>
-                    <address class="event-venue">Allianz Parque, Av. Francisco Matarazzo</address>
-                    
+                    <div class="event-badges-row">
+                        <span class="badge-pill" id="event-capacity-badge">Capacidade: --</span>
+                        <span class="badge-pill badge-secondary" id="event-seat-mode-badge">Entrada Livre</span>
+                    </div>
 
-                    <!-- Seção da Descrição -->
+                    <h1 class="event-title" id="event-title">Carregando evento...</h1>
+
+                    <p class="event-date">
+                        <time id="event-date">--</time>
+                    </p>
+                    <p class="event-establishment" id="event-establishment">--</p>
+                    <p class="event-region" id="event-region">--</p>
+                    <address class="event-venue" id="event-venue">--</address>
+
                     <section class="event-description">
-                        <h2>Descrição do evento:</h2>
-                        <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut 
-                            labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris 
-                            nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.
-                        </p>
+                        <h2>Descrição do evento</h2>
+                        <p id="event-description">--</p>
+                    </section>
+
+                    <section class="minimap-section">
+                        <h2>Localização no Mapa</h2>
+                        <div class="minimap-wrapper">
+                            <iframe
+                                id="event-minimap"
+                                title="Minimapa do local do evento"
+                                loading="lazy"
+                                referrerpolicy="no-referrer-when-downgrade">
+                            </iframe>
+                        </div>
                     </section>
                 </div>
 
-                <!-- BLOCO 3: AÇÃO DE COMPRA (CARRINHO) -->
-                <!-- Usamos a tag <form> porque essa ação enviará dados (quantidade e qual evento) para o PHP processar -->
-                <form action="carrinho.php" method="POST" class="purchase-form" id="purchase-form" data-id="987654321" data-title="Título do ingresso" data-price="150.00" data-image="imagens/capaIngresso.jpg" data-date="2026-11-15T20:00">
-                    
-                    <!-- Campo escondido para enviar o ID do evento para o PHP sem o usuário ver -->
-                    <input type="hidden" name="evento_id" value="987654321">
+                <form class="purchase-box" id="purchase-form">
+                    <h2>Selecionar Ingressos</h2>
 
-                    <div class="quantity-control">
-                        <label for="ticket-quantity">quantidade:</label>
-                        <!-- O type="number" gera automaticamente as setinhas ^ e v (spinbox) no navegador -->
-                        <input type="number" id="ticket-quantity" name="quantidade" min="1" max="10" value="1">
+                    <div class="purchase-controls-grid">
+                        <div class="form-field">
+                            <label for="ticket-category-select">Categoria / Classe</label>
+                            <select id="ticket-category-select" name="categoria"></select>
+                        </div>
+
+                        <div class="form-field">
+                            <label for="ticket-quantity">Quantidade</label>
+                            <input type="number" id="ticket-quantity" name="quantidade" min="1" max="10" value="1">
+                        </div>
+
+                        <div class="price-summary-box">
+                            <span class="price-label">Valor unitário:</span>
+                            <strong class="price-value" id="category-price-display">R$ 0,00</strong>
+                            <small class="stock-hint" id="category-stock-display">-- disponíveis</small>
+                        </div>
                     </div>
-                    
-                    <button type="submit" class="btn-add-cart">Adicionar ao carrinho</button>
+
+                    <div class="seat-selection-container hidden" id="seat-map-section">
+                        <div class="seat-map-header">
+                            <h3>Escolha seus assentos</h3>
+                            <div class="seat-legend">
+                                <span class="legend-item"><i class="seat-dot available"></i> Livre</span>
+                                <span class="legend-item"><i class="seat-dot selected"></i> Selecionado</span>
+                                <span class="legend-item"><i class="seat-dot occupied"></i> Ocupado</span>
+                            </div>
+                        </div>
+                        <div class="stage-indicator">PALCO / TELA</div>
+                        <div class="seat-map-grid" id="seat-map-grid"></div>
+                        <p class="selected-seats-summary" id="selected-seats-display">Nenhum assento selecionado.</p>
+                    </div>
+
+                    <button type="submit" class="btn-add-cart" id="btn-add-cart">Adicionar ao carrinho</button>
                 </form>
-
-                
-
             </article>
-
         </section>
     </main>
+
     <script type="module" src="script.js"></script>
 </body>
 </html>
