@@ -1,0 +1,109 @@
+{
+  "info": {
+    "name": "EventHub API — Etapa 07 (PHP 8 + MySQL 8.0)",
+    "_postman_id": "e7b10700-eventhub-mysql-rest-v1",
+    "description": "Coleção de testes dos endpoints REST da plataforma EventHub conectados ao MySQL via PDO.",
+    "schema": "[https://schema.getpostman.com/json/collection/v2.1.0/collection.json](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8000"
+    }
+  ],
+  "item": [
+    {
+      "name": "1. Auth — Login Cliente",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "url": "{{baseUrl}}/api/auth.php",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"action\": \"login\",\n  \"identifier\": \"cliente@eventhub.com\",\n  \"senha\": \"1234\"\n}"
+        }
+      }
+    },
+    {
+      "name": "2. Events — Listar Eventos Ativos",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/api/events.php"
+      }
+    },
+    {
+      "name": "3. Orders — Checkout Transacional (Cliente)",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "url": "{{baseUrl}}/api/orders.php",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"metodo_pagamento\": \"PIX\",\n  \"items\": [\n    {\n      \"event_id\": 101,\n      \"categoria_id\": 2,\n      \"quantidade\": 1,\n      \"assentos\": [\"A2\"]\n    }\n  ]\n}"
+        }
+      }
+    },
+    {
+      "name": "4. Tickets — Listar Ingressos do Cliente",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/api/tickets.php"
+      }
+    },
+    {
+      "name": "5. Auth — Login Validador",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "url": "{{baseUrl}}/api/auth.php",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"action\": \"login\",\n  \"identifier\": \"validador@eventhub.com\",\n  \"senha\": \"1234\"\n}"
+        }
+      }
+    },
+    {
+      "name": "6. Validate — Consultar QR Code na Portaria",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/api/validate.php?qr=QR-EVT101-A1-987654"
+      }
+    },
+    {
+      "name": "7. Validate — Confirmar Check-in QR Code",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "url": "{{baseUrl}}/api/validate.php",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"codigo_qr\": \"QR-EVT101-A1-987654\"\n}"
+        }
+      }
+    },
+    {
+      "name": "8. Auth — Login Anunciante",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "url": "{{baseUrl}}/api/auth.php",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"action\": \"login\",\n  \"identifier\": \"anunciante@eventhub.com\",\n  \"senha\": \"1234\"\n}"
+        }
+      }
+    },
+    {
+      "name": "9. Events — Publicar Novo Evento",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "url": "{{baseUrl}}/api/events.php",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"action\": \"create\",\n  \"titulo\": \"Meetup Arquitetura PHP & MySQL\",\n  \"estabelecimento\": \"Hub Cerrado\",\n  \"estado\": \"Goiânia, GO\",\n  \"endereco\": \"Av. T-63, 1200\",\n  \"latitude\": -16.705,\n  \"longitude\": -49.268,\n  \"data_evento\": \"2027-02-10 19:30:00\",\n  \"capacidade_maxima\": 60,\n  \"possui_assentos_numerados\": true,\n  \"fileiras\": 5,\n  \"colunas\": 8,\n  \"descricao\": \"Encontro técnico sobre PDO, transações ACID e modelagem relacional.\",\n  \"validadores\": [\"validador@eventhub.com\"],\n  \"categorias\": [\n    { \"nome\": \"Ingresso Único\", \"preco\": 50.00, \"quantidade_disponivel\": 60 }\n  ]\n}"
+        }
+      }
+    }
+  ]
+}
